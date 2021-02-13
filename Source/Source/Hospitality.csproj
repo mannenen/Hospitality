@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\packages\Lib.Harmony.2.0.2\lib\net472\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="0MultiplayerAPI">
@@ -100,12 +100,14 @@
     <Compile Include="Alert_GuestThought.cs" />
     <Compile Include="BedStatsDrawer.cs" />
     <Compile Include="Gizmo_GuestBedStats.cs" />
+    <Compile Include="Harmony\NoLittering_Patch.cs" />
     <Compile Include="Harmony\Pawn_TraderTracker_Patch.cs" />
     <Compile Include="Harmony\Room_Patch.cs" />
-    <Compile Include="Harmony\WorldPawns_Patch.cs" />
+    <Compile Include="Harmony\Pawn_Patch.cs" />
     <Compile Include="IncidentWorker_VisitorGroupSelectFaction.cs" />
     <Compile Include="MainTab\Dialog_MapSettings.cs" />
     <Compile Include="MainTab\MainTabUtility.cs" />
+    <Compile Include="TransitionAction_EnsureHaveNearbyExitDestination.cs" />
     <Compile Include="TransitionAction_MessageDebug.cs" />
     <Compile Include="TransitionAction_SendAway.cs" />
     <Compile Include="Utilities\BedUtility.cs" />

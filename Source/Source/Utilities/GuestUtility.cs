@@ -249,7 +249,12 @@ namespace Hospitality
 
         public static bool ViableGuestTarget(Pawn guest, bool sleepingIsOk = false)
         {
-            return guest.IsArrivedGuest() && !guest.Downed && (sleepingIsOk || guest.Awake()) && !guest.HasDismissiveThought() && !IsInTherapy(guest) && !IsTired(guest) && !IsEating(guest);
+            return guest.IsArrivedGuest() && !guest.Downed && (sleepingIsOk || guest.Awake()) && !guest.HasDismissiveThought() && !IsInTherapy(guest) && !IsTired(guest) && !IsEating(guest) &&!CantBeInterrupted(guest);
+        }
+
+        private static bool CantBeInterrupted(Pawn guest)
+        {
+            return guest.CurJob?.def.casualInterruptible == false;
         }
 
         private static bool IsEating(Pawn guest)
@@ -528,7 +533,9 @@ namespace Hospitality
             guest.inventory.innerContainer.TryDropAll(guest.Position, guest.MapHeld, ThingPlaceMode.Near);
 
             guest.ownership.UnclaimBed();
+            var faction = guest.Faction;
             guest.SetFaction(Faction.OfPlayer);
+            if (PawnUtility.IsFactionLeader(guest)) Log.Warning($"{guest.NameShortColored}: Is still faction leader of {faction?.GetCallLabel()}.");
 
             guest.mindState.exitMapAfterTick = -99999;
             guest.MapHeld.mapPawns.UpdateRegistryForPawn(guest);
